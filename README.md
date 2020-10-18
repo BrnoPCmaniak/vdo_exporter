@@ -8,17 +8,6 @@ Writing an exporter for Prometheus would normally entail using the prometheus-cl
 the rpm for this wasn't available for CentOS or RHEL. So this project just uses standard Python features to implement
 the exporter (a Prometheus client is just a HTTP endpoint anyway!)
 
-I've tested against vm's with the following configurations;  
-
-- RHEL 7.5. beta (kernel 3.10.0-823.el7.x86_64)  
-- Ceph 12.2.2 (luminous)  
-- Python 2.7  
-- vdo 6.1.0.98  
-- Prometheus 2.0 (container - docker.io/prom/prometheus)
-- Grafana 4.6.3 (container - docker.io/grafana/grafana)
-- SELINUX disabled
-- Firewall disabled
-
 ## Installation  
 1. download and extract the archive  
 2. cd to the vdo_exporter directory  
@@ -35,7 +24,7 @@ Optionally copy the systemd file
 ```
 
 ## Running  
-By default the vdo_exporter daemon will bind to 0.0.0.0, listening on port 9285. You'll see
+By default the vdo_exporter daemon will bind to 0.0.0.0, listening on port 9286. You'll see
 the success of scrape requests in the daemon's output.  
 
 
@@ -47,7 +36,7 @@ e.g. under scrape_configs
   # VDO enabled hosts
   - job_name: "vdo_stats"
     static_configs:
-      - targets: [ '10.90.90.82:9285', '10.90.90.123:9285', '10.90.90.121:9285']
+      - targets: [ '10.90.90.82:9286', '10.90.90.123:9286', '10.90.90.121:9286']
 ```
 then reload Prometheus (SIGHUP)  
 
