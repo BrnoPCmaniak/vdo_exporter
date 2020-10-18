@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import signal
 import socket
@@ -46,7 +46,7 @@ class Handler(BaseHTTPRequestHandler):
               <h1>VDO Prometheus Exporter</h1>
               <p><a href='/metrics'>Metrics</a></p>
             </body>
-          </html>""")
+          </html>""".encode("utf-8"))
 
     def metrics(self):
         """
@@ -60,8 +60,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header('Content-type', 'text/plain; charset=utf-8')
         self.end_headers()
-        self.wfile.write(stats.formatted())
-        self.wfile.write('\n')
+        self.wfile.write(stats.formatted().encode("utf-8"))
+        self.wfile.write('\n'.encode("utf-8"))
 
     def do_GET(self):
         """ GET request handler, just handle '/' or '/metrics' endpoints """
