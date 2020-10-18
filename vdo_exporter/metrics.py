@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 from .vdo import VDORoot
 import time
@@ -66,6 +66,7 @@ class VDOStats(object):
         return s.rstrip()
 
     def _get_vol_stats(self):
+        # FDOB 2020 read_cache_hits does not exist on my system commented out
 
         bin2bool = {0: "N",
                     1: "Y"
@@ -79,7 +80,7 @@ class VDOStats(object):
         logical_size = Metric("Logical size (bytes)", "gauge")
         logical_used = Metric("Logical space used (bytes)", "gauge")
         memory_used = Metric("Memory used by the volume (bytes)", "gauge")
-        cache_hits = Metric("Read cache hits to the volume", "gauge")
+        # cache_hits = Metric("Read cache hits to the volume", "gauge")
         volume_metadata = Metric("Volume meta data", "gauge")
         no_space_count = Metric("Volume no space error count", "gauge")
         volume_errors = Metric("Volume error total (PBN + read-only + "
@@ -102,7 +103,7 @@ class VDOStats(object):
             read_only = vol.get_stat('errors_read_only_error_count')
             error_total = no_space_errors + invalid_PBN + read_only
             write_policy = vol.get_stat('write_policy')
-            read_cache_hits = vol.get_stat('read_cache_hits')
+            # read_cache_hits = vol.get_stat('read_cache_hits')
 
             try:
                 write_amp = ((vol.get_stat('bios_meta_write') +
@@ -146,7 +147,7 @@ class VDOStats(object):
             logical_size.add(labels, log_bytes)
             logical_used.add(labels, log_used)
             memory_used.add(labels, mem_used)
-            cache_hits.add(labels, read_cache_hits)
+            # cache_hits.add(labels, read_cache_hits)
             volume_metadata.add(metadata_labels, 0)
             no_space_count.add(labels, no_space_errors)
             volume_errors.add(labels, error_total)
@@ -159,7 +160,7 @@ class VDOStats(object):
         self.metrics['vdo_exporter_volume_logical_bytes'] = logical_size
         self.metrics['vdo_exporter_volume_logical_bytes_used'] = logical_used
         self.metrics['vdo_exporter_volume_memory_used'] = memory_used
-        self.metrics['vdo_exporter_volume_read_cache_hits'] = cache_hits
+        # self.metrics['vdo_exporter_volume_read_cache_hits'] = cache_hits
         self.metrics['vdo_exporter_volume_metadata'] = volume_metadata
         self.metrics['vdo_exporter_volume_error_total'] = volume_errors
         self.metrics['vdo_exporter_volume_no_space_error_total'] = \
