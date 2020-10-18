@@ -9,8 +9,8 @@ import logging.handlers
 import argparse
 import sys
 
-from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-from SocketServer import ThreadingMixIn
+from http.server import HTTPServer, BaseHTTPRequestHandler
+from socketserver import ThreadingMixIn
 from vdo_exporter import VDOStats
 from vdo_exporter.utils import valid_ipv4, valid_tcp_port
 

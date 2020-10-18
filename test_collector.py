@@ -4,6 +4,6 @@ from vdo_exporter import VDOStats
 
 stats = VDOStats()
 stats.collect()
-print stats.formatted()
+print(stats.formatted())
 
 

@@ -52,7 +52,7 @@ class VDOStats(object):
 
             for v in metric.data:
                 labels = []
-                for n in v['labels'].items():
+                for n in list(v['labels'].items()):
                     label_name = '{}='.format(n[0])
                     label_value = '"{}"'.format(n[1])
 
